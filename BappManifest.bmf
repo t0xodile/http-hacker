@@ -2,12 +2,12 @@ Uuid: 657363a6ea0a42d0be7f0b781249089f
 ExtensionType: 1
 Name: HTTP Hacker
 RepoName: http-hacker
-ScreenVersion: 1.0.0
-SerialVersion: 2
+ScreenVersion: 1.1.0
+SerialVersion: 3
 MinPlatformVersion: 22
 ProOnly: False
 Author: Martin Doyhenard, PortSwigger
 ShortDescription: Provides complete visibility of HTTP messages without any automatic parsing and direct access to request and response queues.
-EntryPoint: HTTP-Raider.jar
+EntryPoint: HTTP-Hacker.jar
 BuildCommand: ./gradlew build test
 SupportedProducts: Pro, Community
