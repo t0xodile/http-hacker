@@ -46,6 +46,7 @@ public class ConnectionBar extends JPanel {
 
     public ConnectionBar() {
         super(new BorderLayout());
+        setOpaque(false);
         currentState = State.DISCONNECTED;
         sendButton = new JButton(TXT_BTN_CONNECT_AND_SEND);
         resetCheckBox = new JCheckBox();
@@ -167,6 +168,15 @@ public class ConnectionBar extends JPanel {
         b.addActionListener(l);
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setColor(getBackground());
+        g2.fillRect(0, 0, getWidth(), getHeight());
+        g2.dispose();
+        super.paintComponent(g);
+    }
+
     public void setState(State st) {
         currentState = st;
         switch (st) {
@@ -178,19 +188,18 @@ public class ConnectionBar extends JPanel {
     }
 
     private void apply(String txt, Color back, Color font, Color btnColor, String btnTxt, boolean sendEnabled, boolean disconnectEnabled, boolean fieldsEnabled) {
-        invokeLater(()->{
-            setBackground(back);
-            statusMsg.setText(txt);
-            statusMsg.setForeground(font);
-            sendButton.setText(resetCheckBox.isSelected() ? TXT_BTN_CONNECT_AND_SEND :btnTxt);
-            sendButton.setEnabled(sendEnabled);
-            sendButton.setBackground(resetCheckBox.isSelected() ? BTN_COLOR_CONNECT : btnColor);
-            disconnectButton.setEnabled(disconnectEnabled);
-            hostField.setEnabled(fieldsEnabled);
-            portField.setEnabled(fieldsEnabled);
-            tlsCheckBox.setEnabled(fieldsEnabled);
-            resetCheckBox.setEnabled(sendEnabled);
-        });
+        setBackground(back);
+        statusMsg.setText(txt);
+        statusMsg.setForeground(font);
+        sendButton.setText(resetCheckBox.isSelected() ? TXT_BTN_CONNECT_AND_SEND :btnTxt);
+        sendButton.setEnabled(sendEnabled);
+        sendButton.setBackground(resetCheckBox.isSelected() ? BTN_COLOR_CONNECT : btnColor);
+        disconnectButton.setEnabled(disconnectEnabled);
+        hostField.setEnabled(fieldsEnabled);
+        portField.setEnabled(fieldsEnabled);
+        tlsCheckBox.setEnabled(fieldsEnabled);
+        resetCheckBox.setEnabled(sendEnabled);
+        repaint();
     }
 
     public void setHost(String host){
